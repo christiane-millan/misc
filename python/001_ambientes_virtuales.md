@@ -18,13 +18,27 @@ Siempre instala nuevos paquetes de manera virtual
 ### Crear ambientes virtuales
 
 ```python
-python -m venv env
+python -m venv venv
 ```
 
 ### Activar un ambiente virtual
 
+En Linux o macOS
 ```python
-source env/bin/activate
+source venv/bin/activate
+```
+En Windows 
+```terminal
+.\venv\Scripts\activate
+```
+
+Tip: Crear alias en Windows
+```terminal
+alias avenv =  .\venv\Scripts\activate
+```
+En sistemas basados en Unix los alias se tienen que agregar al perfil de la configuración inicial de la terminal `bashrc` o `zshrc`.
+```terminal
+alias avenv =  source venv/bin/activate
 ```
 
 ### Desactivar un ambiente virtual
@@ -33,14 +47,15 @@ source env/bin/activate
 deactivate
 ```
 
-### Instalación de una librería
+### Instalación de dependencias con PIP (Package Installer for Python)
 
-Una vez con nuestro ambiente virtual podemos instalar la librería que queramos
+Una vez con nuestro ambiente virtual podemos instalar las dependencias requeridas. Ejemplo: Requests, BeautifulSoup4, Pandas, Numpy, Pytest
 
-Ejemplo: Instalamos la librería bokeh` 
+Ejemplo: Instalamos algunas dependencias 
 
 ```python
 pip install bokeh
+pip install pandas
 ```
 
 Para conocer que tenemos intalado en el ambiente virtual utilizamos:
@@ -48,8 +63,23 @@ Para conocer que tenemos intalado en el ambiente virtual utilizamos:
 ```python
 pip freeze
 ```
+Si no funciona pip, puedes utilizar pip3
+
+Para compartir las dependencias de mi proyecto se crea un archivo requirements.txt
+
+```terminal
+pip freeze > requirements.txt
+```
+
+Recuperar las dependencias en otro computador
+
+```terminal
+pip install -r requirements.txt
+```
 
 ## Ambientes virtuales en Conda
+
+Es una alternativa a PIP, es un software orientado a Data Sciences. Incluye una GUI
 
 ### Crear ambientes virtuales
 
@@ -69,10 +99,16 @@ conda activate cmdpy37
 conda deactivate
 ```
 
-### Desactivar un ambiente virtual
+### Listar ambiente virtual
 
 ```python
 conda env list
+```
+
+para mandar requirements.txt a un archivo
+
+```terminal
+conda list --export > requirements.txt
 ```
 
 ### Eliminar un ambiente virtual
@@ -81,3 +117,13 @@ conda env list
 conda env remove --name cmdpy37
 ```
 
+### Instalación de dependencias con Anaconda
+
+```terminal
+conda install pandas
+```
+o desde un archivo requirements.txt
+
+```terminal
+conda install --file requirements.txt
+```
